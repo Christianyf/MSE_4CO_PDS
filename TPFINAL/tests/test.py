@@ -9,23 +9,22 @@ def reset(dut):
     yield Timer(20, units='ns')
     yield RisingEdge(dut.clk)
     dut.rst <= 0
+    #dut.en <= 1
     yield RisingEdge(dut.clk)
     dut.rst._log.info("Reset complete")
 
 @cocotb.test()
-def test_cordic(dut):
+def test_encoder(dut):
 
     cocotb.fork(Clock(dut.clk, 10, units='ns').start())
     yield reset(dut)
     
-    dut.en_i <= 1
-    dut.x_i <= -13
-    dut.y_i <= -8
-    dut.z_i <= 0
-    yield Timer(120, units='ns')
+    dut.x_i <= 1
+
+    yield Timer(20, units='ns')
     yield RisingEdge(dut.clk)
-    dut.en_i <= 0
-    for _ in range(1):
+    dut.en_i <= 1
+    for _ in range(15):
         yield RisingEdge(dut.clk)    
 
     

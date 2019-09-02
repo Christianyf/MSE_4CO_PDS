@@ -1,0 +1,13 @@
+v 4
+file / "/home/christian/Desktop/MSE_4CO_PDS/TPFINAL/mapping.vhd" "39b8d676d4a9d612f581a068cf07d676005fc8e8" "20190901220123.604":
+  entity mux at 1( 0) + 0 on 67;
+  architecture arc_mux of mux at 27( 568) + 0 on 68;
+file / "/home/christian/Desktop/MSE_4CO_PDS/TPFINAL/encoder.vhd" "d880b66fe90cb51ea15e6fa0de2a2245c93a5693" "20190901220123.602":
+  entity encoder at 1( 0) + 0 on 65;
+  architecture structural of encoder at 22( 395) + 0 on 66;
+file / "/home/christian/Desktop/MSE_4CO_PDS/TPFINAL/piso.vhd" "c856813569b33da3c2d1790ac2f66d23e240095d" "20190901220123.599":
+  entity piso at 20( 483) + 0 on 63;
+  architecture behavioral of piso at 41( 1069) + 0 on 64;
+file / "/home/christian/Desktop/MSE_4CO_PDS/TPFINAL/branch.vhd" "ba8c260dd760324f1bdf00056771a3ac59b476b9" "20190901220123.597":
+  entity rama at 1( 0) + 0 on 61;
+  architecture estructura of rama at 24( 527) + 2 on 62;

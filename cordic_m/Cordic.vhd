@@ -4,8 +4,9 @@ use IEEE.numeric_std.all;
 
 entity cordic is
   generic(
-    N : natural := 8; --Ancho de la palabra 16
-    ITER : natural := 10);--Numero de iteraciones 16
+    N : natural := 16; --Ancho de la palabra 16
+    ITER : natural := 10;--Numero de iteraciones 16
+    PI : natural  := 1608);
   port(
     clk : in std_logic;
     rst : in std_logic;
@@ -52,13 +53,14 @@ architecture structural of cordic is
   type intLUT is array(ITER-1 downto 0) of integer range 0 to 2**N;
   --signal atanLUT : intLUT := (11,10,9,8,7,6,5,4,3,2,1); -- No son valores reales!
   --signal atanLUT : intLUT := (50,29,15,8,4,2,1,1,1,1);--tabla de arctan
-  signal atanLUT : intLUT := (1,1,1,1,2,4,8,15,29,50);--tabla de arctan
-  
+  signal atanLUT : intLUT := (1,2,4,8,16,32,64,125,237,402);--tabla de arctan
+  signal angle_correction: std_logic_vector (N-1 downto 0);
 
 begin
 
 en(0) <= en_i;
-wirex(0) <= x_i;
+wirex(0) <= std_logic_vector(-signed(x_i)) when (signed(x_i) < 0 ) else 
+            x_i;
 wirey(0) <= y_i;
 wirez(0) <= z_i;
 
@@ -83,9 +85,14 @@ CONNECTION_INSTANCE: for j in 0 to ITER-1 generate
         );
   end generate;
 
+  --angle_correction <= std_logic_vector(to_signed(PI,N));
+z_o <= std_logic_vector(to_signed(PI,N) - signed(wirez(ITER))) when (signed(x_i) < 0 and signed(y_i) > 0) else 
+       std_logic_vector(-to_signed(PI,N) - signed(wirez(ITER))) when (signed(x_i) < 0 and signed(y_i) < 0) else
+       wirez(ITER);
+       
 dv_o <= dv(ITER-1);
 x_o <= wirex(ITER);
 y_o <= wirey(ITER);
-z_o <= wirez(ITER);
+--z_o <= wirez(ITER);
 
 end architecture;

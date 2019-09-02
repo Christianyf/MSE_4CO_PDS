@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name="results">
+  <testsuite name="all" package="all" tests="0">
+    <property name="random_seed" value="1567301447" />
+    <testcase classname="test" name="test_piso" ratio_time="8420.831772172232" sim_time_ns="150.000001" time="0.01781296730041504" />
+  </testsuite>
+</testsuites>

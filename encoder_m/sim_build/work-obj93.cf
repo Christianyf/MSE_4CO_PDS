@@ -1,0 +1,4 @@
+v 4
+file / "/home/christian/Desktop/MSE_4CO_PDS/encoder_m/encoder.vhd" "d880b66fe90cb51ea15e6fa0de2a2245c93a5693" "20190830195913.603":
+  entity encoder at 1( 0) + 0 on 89;
+  architecture structural of encoder at 22( 395) + 0 on 90;

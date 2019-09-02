@@ -4,28 +4,28 @@ from cocotb.clock import Clock, Timer
 
 @cocotb.coroutine
 def reset(dut):
-    dut.en_i <= 0
+    dut.write_en <= 0
     dut.rst <= 1
     yield Timer(20, units='ns')
     yield RisingEdge(dut.clk)
     dut.rst <= 0
+    #dut.en <= 1
     yield RisingEdge(dut.clk)
     dut.rst._log.info("Reset complete")
 
 @cocotb.test()
-def test_cordic(dut):
+def test_piso(dut):
 
     cocotb.fork(Clock(dut.clk, 10, units='ns').start())
     yield reset(dut)
     
-    dut.en_i <= 1
-    dut.x_i <= -13
-    dut.y_i <= -8
-    dut.z_i <= 0
-    yield Timer(120, units='ns')
+    dut.p_u1 <= 1
+    dut.p_u2 <= 0
+
+    yield Timer(20, units='ns')
     yield RisingEdge(dut.clk)
-    dut.en_i <= 0
-    for _ in range(1):
+    dut.write_en <= 1
+    for _ in range(10):
         yield RisingEdge(dut.clk)    
 
     
